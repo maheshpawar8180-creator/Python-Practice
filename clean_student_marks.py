@@ -1,26 +1,19 @@
-import pandas as pd
+from getpass import getpass
 
-# Create a DataFrame. None represents a mark that is missing.
-students = {
-    "Name": ["Aisha", "Ben", "Carlos", "Divya", "Ethan"],
-    "Marks": [85, 92, None, 78, None],
-}
-df = pd.DataFrame(students)
+# Practice-only example credentials. Do not use real passwords in source code.
+EXPECTED_NAME = "Demo Student"
+EXPECTED_EMAIL = "student@example.com"
+EXPECTED_PASSWORD = "practice123"
 
-# Check how many marks are missing before cleaning.
-print("Missing marks before cleaning:")
-print(df["Marks"].isna().sum())
+user_name = input("Enter your name: ").strip()
+email = input("Enter your email: ").strip()
+password = getpass("Enter your password: ")
 
-# Calculate the average of the available marks, then fill in missing marks.
-average_marks = df["Marks"].mean()
-df["Marks"] = df["Marks"].fillna(average_marks)
-
-# Display the cleaned DataFrame.
-print("\nCleaned DataFrame:")
-print(df)
-
-# Verify that the DataFrame has no missing values left.
-if df.isna().sum().sum() == 0:
-    print("\nVerified: no missing values remain.")
+if (
+    user_name == EXPECTED_NAME
+    and email == EXPECTED_EMAIL
+    and password == EXPECTED_PASSWORD
+):
+    print(f"Welcome, {user_name}!")
 else:
-    print("\nMissing values still remain.")
+    print("The name, email, or password is incorrect.")
